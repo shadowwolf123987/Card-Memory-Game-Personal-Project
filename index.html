@@ -28,7 +28,7 @@
     </section>
 
     <ul class="cardsBoard">
-        <li class="card" id="1" onclick="a1Click">  </li>
+        <li class="card" id="1" onclick="a1Click()"> </li>
         <li class="card" id="2">  </li>
         <li class="card" id="3">  </li>
         <li class="card" id="4">  </li>
@@ -45,32 +45,41 @@
     <script>
 
         var nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+        var imgs = ["atom.png", "brain.png", "console.png", "devil.png", "fist.png", "hazard.png", "atom.png", "brain.png", "console.png", "devil.png", "fist.png", "hazard.png"]
         var positions = []
-        var y = 0
+        var x = 0
         var length = nums.length
-        a1 = document.getElementById("1")
-        a2 = document.getElementById("2")
-        a3 = document.getElementById("3")
-        a4 = document.getElementById("4")
-        b1 = document.getElementById("5")
-        b2 = document.getElementById("6")
-        b3 = document.getElementById("7")
-        b4 = document.getElementById("8")
-        c1 = document.getElementById("9")
-        c2 = document.getElementById("10")
-        c3 = document.getElementById("11")
-        c4 = document.getElementById("12")
 
         //Randomly choose positions of cards
-        while (y < length) {
-            var x = Math.floor(Math.random() * ((nums.length) - 1))
-            positions.push(nums[x])
-            nums.splice(x, 1)
-            y++;
+        while (x < length) {
+            var y = Math.floor(Math.random() * ((nums.length) - 1))
+            positions.push(nums[y])
+            nums.splice(y, 1)
+            x++;
+        }
+
+        x=0
+        while (x < length) {
+            var listItem = document.getElementById(positions[x])   
+            var img = document.createElement("img");
+            img.src = "Images/" + imgs[x];
+            img.style.visibility = "visible"
+            img.setAttribute("id", imgs[x])
+            img.setAttribute("class", "icon")
+            listItem.appendChild(img)
+            x++
+        }
+
+        var shownCards = document.querySelectorAll("img.icon,[visibility=visible]")
+
+        var gameLoop = true
+        while (gameLoop == true) {
+            var shownCards = document.querySelectorAll("img.icon,[visibility=visible]")
+            gameLoop = false
         }
 
         function a1Click() {
-            a1.setAttribute("value", "test")
+            
         }
 
     </script>
