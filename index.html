@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Card Memory Game </title>
+    <link rel="stylesheet" href="style.css">
+    <link href="Images/faviconLight.png"
+          rel="icon"
+          media="(prefers-color-scheme: light)" />
+    <link href="Images/faviconDark.png"
+          rel="icon"
+          media="(prefers-color-scheme: dark)" />
+
+</head>
+
+<body>
+
+    <h1 class="header"> Card Memory Game </h1>
+
+    <section class="board">
+        <div class="pairsDiv"> <span class="pairs"> 0 </span> Correct Pairs </div>
+        <div class="movesDiv"> <span class="moves"> 0 </span> Moves </div>
+        <div class="refreshDiv"> <img class="refreshImg" src="Images/refresh.png"> </div>
+    </section>
+
+    <ul class="cardsBoard">
+        <li class="card" id="1" onclick="a1Click">  </li>
+        <li class="card" id="2">  </li>
+        <li class="card" id="3">  </li>
+        <li class="card" id="4">  </li>
+        <li class="card" id="5">  </li>
+        <li class="card" id="6">  </li>
+        <li class="card" id="7">  </li>
+        <li class="card" id="8">  </li>
+        <li class="card" id="9">  </li>
+        <li class="card" id="10">  </li>
+        <li class="card" id="11">  </li>
+        <li class="card" id="12">  </li>
+    </ul>
+
+    <script>
+
+        var nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+        var positions = []
+        var y = 0
+        var length = nums.length
+        a1 = document.getElementById("1")
+        a2 = document.getElementById("2")
+        a3 = document.getElementById("3")
+        a4 = document.getElementById("4")
+        b1 = document.getElementById("5")
+        b2 = document.getElementById("6")
+        b3 = document.getElementById("7")
+        b4 = document.getElementById("8")
+        c1 = document.getElementById("9")
+        c2 = document.getElementById("10")
+        c3 = document.getElementById("11")
+        c4 = document.getElementById("12")
+
+        //Randomly choose positions of cards
+        while (y < length) {
+            var x = Math.floor(Math.random() * ((nums.length) - 1))
+            positions.push(nums[x])
+            nums.splice(x, 1)
+            y++;
+        }
+
+        function a1Click() {
+            a1.setAttribute("value", "test")
+        }
+
+    </script>
+
+</body>
+
+</html>
