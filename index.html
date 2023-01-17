@@ -28,29 +28,32 @@
     </section>
 
     <ul class="cardsBoard">
-        <li class="card" id="1" onclick="a1Click()"> </li>
-        <li class="card" id="2">  </li>
-        <li class="card" id="3">  </li>
-        <li class="card" id="4">  </li>
-        <li class="card" id="5">  </li>
-        <li class="card" id="6">  </li>
-        <li class="card" id="7">  </li>
-        <li class="card" id="8">  </li>
-        <li class="card" id="9">  </li>
-        <li class="card" id="10">  </li>
-        <li class="card" id="11">  </li>
-        <li class="card" id="12">  </li>
+        <li class="card" id="1" onclick="Click(1)"> </li>
+        <li class="card" id="2" onclick="Click(2)">  </li>
+        <li class="card" id="3" onclick="Click(3)">  </li>
+        <li class="card" id="4" onclick="Click(4)">  </li>
+        <li class="card" id="5" onclick="Click(5)">  </li>
+        <li class="card" id="6" onclick="Click(6)">  </li>
+        <li class="card" id="7" onclick="Click(7)">  </li>
+        <li class="card" id="8" onclick="Click(8)">  </li>
+        <li class="card" id="9" onclick="Click(9)">  </li>
+        <li class="card" id="10" onclick="Click(10)">  </li>
+        <li class="card" id="11" onclick="Click(11)">  </li>
+        <li class="card" id="12" onclick="Click(12)">  </li>
     </ul>
 
     <script>
 
         var nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
         var imgs = ["atom.png", "brain.png", "console.png", "devil.png", "fist.png", "hazard.png", "atom.png", "brain.png", "console.png", "devil.png", "fist.png", "hazard.png"]
+        var shownCards = []
         var positions = []
+        var corrPairs = 0
+        var moves = 0
         var x = 0
         var length = nums.length
 
-        //Randomly choose positions of cards
+        //Randomly chooses positions of cards
         while (x < length) {
             var y = Math.floor(Math.random() * ((nums.length) - 1))
             positions.push(nums[y])
@@ -58,28 +61,75 @@
             x++;
         }
 
+        //Adds random image as a child to each card
         x=0
         while (x < length) {
             var listItem = document.getElementById(positions[x])   
             var img = document.createElement("img");
             img.src = "Images/" + imgs[x];
-            img.style.visibility = "visible"
+            img.style.visibility = "hidden"
             img.setAttribute("id", imgs[x])
             img.setAttribute("class", "icon")
             listItem.appendChild(img)
             x++
         }
 
-        var shownCards = document.querySelectorAll("img.icon,[visibility=visible]")
+        //Ran on click, Logic all done in this so a loop is not needed to constantly check the state of cards
+        function Click(buttonId) {
+            //Finds element that was clicked
+            var card = document.getElementById(buttonId)
+            imgChild = card.childNodes[1]
+            //Sets child img of clicked card to visible
+            imgChild.style.visibility = "visible"
+            //Locates all img elements with class icon
+            var temp = document.querySelectorAll("img.icon")
+            x = 0
+            //Checks if images are visible
+            while (x < temp.length) {
+                if (temp[x].style.visibility == "visible") {
+                    shownCards.push(temp[x])
+                }
+                x++
+            }
 
-        var gameLoop = true
-        while (gameLoop == true) {
-            var shownCards = document.querySelectorAll("img.icon,[visibility=visible]")
-            gameLoop = false
-        }
+            //Removes duplicate value from list
+            x=0
+            if (shownCards[x] == shownCards[x + 1]) {
+                shownCards.splice(x+1,1)
+            }
 
-        function a1Click() {
+            console.log(shownCards.length)
+            console.log(shownCards[0])
+            console.log(shownCards[1])
+            console.log(shownCards[2])
+            console.log(shownCards[3])
+            console.log(shownCards[4])
             
+            //Ensures no more than 2 cards are visible at once
+            if (shownCards.length > 2) {
+                var allImgs = document.getElementsByClassName("icon")
+                shownCards.length = 0
+                x = 0
+                while (x < allImgs.length) {
+                    allImgs[x].style.visibility = "hidden"
+                    x++
+                }
+
+            }
+
+            //Checks whether two images with the same id are visible at once
+            if (shownCards[0].id == shownCards[1].id) {
+                alert(shownCards[0].id)
+                alert(shownCards[1].id)
+                shownCards[0].style.visibility = "hidden"
+                ((shownCards[0]).childNodes[1]).style.visibility = "hidden"
+                shownCards[1].style.visibility = "hidden"
+                ((shownCards[1]).childNodes[1]).style.visibility = "hidden"
+                corrPairs++
+            }
+            else {
+
+            }
         }
 
     </script>
